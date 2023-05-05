@@ -26,7 +26,6 @@ public class WebSeriesService {
         //use function written in Repository Layer for the same
         //Dont forget to save the production and webseries Repo
         ProductionHouse productionHouse=productionHouseRepository.findById(webSeriesEntryDto.getProductionHouseId()).get();
-        productionHouse.setRatings(webSeriesEntryDto.getRating());
         WebSeries webSeries=new WebSeries();
         List<WebSeries>webSeriesList=webSeriesRepository.findAll();
         for(WebSeries w:webSeriesList)
@@ -44,6 +43,15 @@ public class WebSeriesService {
 
         //productionHouse.setRatings(webSeriesEntryDto.getRating());
         productionHouse.getWebSeriesList().add(webSeries);
+        int totalRating=0;
+        List<WebSeries>seriesList=productionHouse.getWebSeriesList();
+        int size=productionHouse.getWebSeriesList().size();
+        for(WebSeries series:seriesList)
+        {
+            totalRating+=series.getRating();
+        }
+        int prodRating=totalRating/size;
+        productionHouse.setRatings(prodRating);
 
         productionHouseRepository.save(productionHouse);
         return webSeriesRepository.save(webSeries).getId();
