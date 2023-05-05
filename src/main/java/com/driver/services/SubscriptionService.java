@@ -71,20 +71,19 @@ public class SubscriptionService {
         int numberOfScreens=subscription.getNoOfScreensSubscribed();
         if(subscription.getSubscriptionType()==SubscriptionType.BASIC)
         {
-
+            subscription.setSubscriptionType(SubscriptionType.PRO);
             int initial=subscription.getTotalAmountPaid();
             int revised=800+(250*numberOfScreens);
             diffAmt=revised-initial;
-            subscription.setSubscriptionType(SubscriptionType.PRO);
             subscription.setTotalAmountPaid(revised);
             subscription.setStartSubscriptionDate(new Date());
         }
         if(subscription.getSubscriptionType()==SubscriptionType.PRO)
         {
+            subscription.setSubscriptionType(SubscriptionType.ELITE);
             int initial=subscription.getTotalAmountPaid();
             int revised=1000+(350*numberOfScreens);
             diffAmt=revised-initial;
-            subscription.setSubscriptionType(SubscriptionType.ELITE);
             subscription.setTotalAmountPaid(revised);
             subscription.setStartSubscriptionDate(new Date());
         }
