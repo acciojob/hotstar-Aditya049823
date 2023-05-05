@@ -86,9 +86,9 @@ public class SubscriptionService {
             subscription.setSubscriptionType(SubscriptionType.ELITE);
             subscription.setTotalAmountPaid(revised);
         }
-        subscription.setUser(user);
+        //subscription.setUser(user);
 
-        user.setSubscription(subscription);
+        //user.setSubscription(subscription);
 
         subscriptionRepository.save(subscription);
 
