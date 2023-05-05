@@ -26,6 +26,7 @@ public class WebSeriesService {
         //use function written in Repository Layer for the same
         //Dont forget to save the production and webseries Repo
         ProductionHouse productionHouse=productionHouseRepository.findById(webSeriesEntryDto.getProductionHouseId()).get();
+        productionHouse.setRatings(webSeriesEntryDto.getRating());
         WebSeries webSeries=new WebSeries();
         List<WebSeries>webSeriesList=webSeriesRepository.findAll();
         for(WebSeries w:webSeriesList)
@@ -41,11 +42,11 @@ public class WebSeriesService {
         webSeries.setSubscriptionType(webSeriesEntryDto.getSubscriptionType());
         webSeries.setProductionHouse(productionHouse);
 
-        productionHouse.setRatings(webSeriesEntryDto.getRating());
+        //productionHouse.setRatings(webSeriesEntryDto.getRating());
         productionHouse.getWebSeriesList().add(webSeries);
 
-        webSeriesRepository.save(webSeries);
-        return productionHouseRepository.save(productionHouse).getId();
+        productionHouseRepository.save(productionHouse);
+        return webSeriesRepository.save(webSeries).getId();
     }
 
 }
