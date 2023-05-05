@@ -77,6 +77,7 @@ public class SubscriptionService {
             diffAmt=revised-initial;
             subscription.setSubscriptionType(SubscriptionType.PRO);
             subscription.setTotalAmountPaid(revised);
+            subscription.setStartSubscriptionDate(new Date());
         }
         if(subscription.getSubscriptionType()==SubscriptionType.PRO)
         {
@@ -85,6 +86,7 @@ public class SubscriptionService {
             diffAmt=revised-initial;
             subscription.setSubscriptionType(SubscriptionType.ELITE);
             subscription.setTotalAmountPaid(revised);
+            subscription.setStartSubscriptionDate(new Date());
         }
         //subscription.setUser(user);
 
