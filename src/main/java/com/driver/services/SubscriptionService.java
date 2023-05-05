@@ -68,23 +68,19 @@ public class SubscriptionService {
             throw new Exception("Already the best Subscription");
         }
         int diffAmt=0;
-        int numberOfScreens=subscription.getNoOfScreensSubscribed();
+        //int numberOfScreens=subscription.getNoOfScreensSubscribed();
         if(subscription.getSubscriptionType()==SubscriptionType.BASIC)
         {
             subscription.setSubscriptionType(SubscriptionType.PRO);
-            int initial=subscription.getTotalAmountPaid();
-            int revised=800+(250*numberOfScreens);
-            diffAmt=revised-initial;
-            subscription.setTotalAmountPaid(revised);
+            diffAmt=(800+(250*subscription.getNoOfScreensSubscribed()))-subscription.getTotalAmountPaid();
+            subscription.setTotalAmountPaid(800+(250*subscription.getNoOfScreensSubscribed()));
             subscription.setStartSubscriptionDate(new Date());
         }
         if(subscription.getSubscriptionType()==SubscriptionType.PRO)
         {
             subscription.setSubscriptionType(SubscriptionType.ELITE);
-            int initial=subscription.getTotalAmountPaid();
-            int revised=1000+(350*numberOfScreens);
-            diffAmt=revised-initial;
-            subscription.setTotalAmountPaid(revised);
+            diffAmt=(1000+(350*subscription.getNoOfScreensSubscribed()))-subscription.getTotalAmountPaid();
+            subscription.setTotalAmountPaid(1000+(350*subscription.getNoOfScreensSubscribed()));
             subscription.setStartSubscriptionDate(new Date());
         }
         //subscription.setUser(user);
