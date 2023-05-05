@@ -69,7 +69,7 @@ public class SubscriptionService {
         }
         int diffAmt=0;
         int numberOfScreens=subscription.getNoOfScreensSubscribed();
-        if(subscription.getSubscriptionType().equals(SubscriptionType.BASIC))
+        if(subscription.getSubscriptionType()==SubscriptionType.BASIC)
         {
 
             int initial=subscription.getTotalAmountPaid();
@@ -78,7 +78,7 @@ public class SubscriptionService {
             subscription.setSubscriptionType(SubscriptionType.PRO);
             subscription.setTotalAmountPaid(revised);
         }
-        if(subscription.getSubscriptionType().equals((SubscriptionType.PRO)))
+        if(subscription.getSubscriptionType()==SubscriptionType.PRO)
         {
             int initial=subscription.getTotalAmountPaid();
             int revised=1000+(350*numberOfScreens);
