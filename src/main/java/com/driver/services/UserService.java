@@ -36,24 +36,19 @@ public class UserService {
         int count=0;
         int userAge=user.getAge();
         List<WebSeries>webSeriesList=webSeriesRepository.findAll();
-        int countBasic=0;
-        int countPro=0;
         for(WebSeries w:webSeriesList) {
-            if (w.getSubscriptionType().equals(SubscriptionType.BASIC)) {
-                countBasic++;
+            if(w.getAgeLimit()<=userAge && user.getSubscription().getSubscriptionType()==SubscriptionType.ELITE)
+            {
+                count++;
             }
-            if (w.getSubscriptionType().equals(SubscriptionType.PRO)) {
-                countBasic++;
-                countPro++;
+            else if(w.getAgeLimit()<=userAge && user.getSubscription().getSubscriptionType()==SubscriptionType.PRO &&(w.getSubscriptionType()==SubscriptionType.PRO || w.getSubscriptionType()==SubscriptionType.BASIC))
+            {
+                count++;
             }
-        }
-        if(user.getSubscription().getSubscriptionType().equals(SubscriptionType.BASIC))
-        {
-            count+=countBasic;
-        }
-        if(user.getSubscription().getSubscriptionType().equals(SubscriptionType.PRO) || user.getSubscription().getSubscriptionType().equals(SubscriptionType.ELITE))
-        {
-            count+=countBasic+countPro;
+            else if (w.getAgeLimit()<=userAge && user.getSubscription().getSubscriptionType()==SubscriptionType.BASIC &&(w.getSubscriptionType()==SubscriptionType.BASIC || w.getSubscriptionType()==SubscriptionType.PRO))
+            {
+                count++;
+            }
         }
         return count;
     }
